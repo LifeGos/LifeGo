@@ -263,12 +263,6 @@
           <video id="video1" autoplay controls muted loop playsinline style="width:100%;">
             <source src="static/videos/box.mp4" type="video/mp4">
           </video>
-          <div class="video-caption">
-            <p class="has-text-centered"><b>box</b></p>
-            <p class="has-text-centered is-size-5 has-text-grey">
-              SpatialLM을 이용한 공간 바운딩박스를 WebXR에 시각화할 수 있는 버튼입니다.
-            </p>
-          </div>
         </div>
 
         <!-- 두 번째 비디오 -->
@@ -276,12 +270,7 @@
           <video id="video2" autoplay controls muted loop playsinline style="width:100%;">
             <source src="static/videos/log.mp4" type="video/mp4">
           </video>
-          <div class="video-caption">
-            <p class="has-text-centered"><b>log</b></p>
-            <p class="has-text-centered is-size-5 has-text-grey">
-              사용자 전체 활동 로그를 조회할 수 있습니다. 특정 이벤트에 대한 이미지와 라이프로그를 검색할 수도 있습니다.
-            </p>
-          </div>
+
         </div>
 
         <!-- 세 번째 비디오 -->
@@ -289,12 +278,6 @@
           <video id="video3" autoplay controls muted loop playsinline style="width:100%;">
             <source src="static/videos/query.mp4" type="video/mp4">
           </video>
-          <div class="video-caption">
-            <p class="has-text-centered"><b>query</b></p>
-            <p class="has-text-centered is-size-5 has-text-grey">
-              자연어 질의를 통해 해당 질문에 대한 답변을 도출합니다. 또한, 저장된 라이프로그를 시각화합니다.(이동경로, 이벤트 이미지)
-            </p>
-          </div>
         </div>
 
       </div>
@@ -381,7 +364,7 @@
       </div>
       <div class="kpi-card">
         <div class="badge">Storage</div>
-        <div class="kpi-metric">약 25 KB/event</div>
+        <div class="kpi-metric">약 20 KB/event</div>
         <div class="muted">요약 JSONL 기준</div>
       </div>
       <div class="kpi-card">
@@ -392,14 +375,14 @@
       <div class="kpi-card">
         <div class="badge">Devices</div>
         <div class="kpi-metric">AR + HMD</div>
-        <div class="muted">AR 글래스 / Quest 3</div>
+        <div class="muted">AR 글래스 / Quest 3 / Vision Pro</div>
       </div>
     </div>
 
     <ul class="mt-3">
       <li><b>Hardware</b>: HMD(Quest 3), 안경형 AR 글래스</li>
       <li><b>Software</b>: Node.js / Python 3.10 / MariaDB, A-Frame · Three.js(WebXR)</li>
-      <li><b>Models</b>: BLIP3o(Qwen2.5-VL-7B-Instruct), Whisper, YaMNet, gpt-4o</li>
+      <li><b>Models</b>: BLIP3o(Qwen2.5-VL-7B-Instruct), Whisper, YaMNet, SpatialLM, gpt-4o</li>
       <li><b>Formats</b>: <code>event_summaries_YYYY_MM_DD.jsonl</code> + 대표 프레임/썸네일</li>
     </ul>
   </div>
@@ -412,10 +395,10 @@
     <div class="dp-grid">
       <!-- 좌: 간단 흐름 다이어그램 -->
       <div class="dp-flow">
-        <div class="dp-step"><span class="icon-xl">📷</span><div><b>Capture</b> — 이미지/오디오/위치</div></div>
-        <div class="dp-step"><span class="icon-xl">🧠</span><div><b>Summarize</b> — 임베딩 벡터 유사도로 이벤트 요약</div></div>
-        <div class="dp-step"><span class="icon-xl">🏷️</span><div><b>Tag</b> — 활동/장소/객체 태깅</div></div>
-        <div class="dp-step"><span class="icon-xl">🗂️</span><div><b>Store</b> — JSONL + 대표 프레임(🔒이미지 자체 저장은 옵션)</div></div>
+        <div class="dp-step"><span class="icon-xl">📷</span><div><b>Capture</b> — 시각·청각·위치 데이터를 HMD (스마트 글래스) 기반으로 실시간 수집</div></div>
+        <div class="dp-step"><span class="icon-xl">🧠</span><div><b>Summarize</b> — 임베딩 기반 유사도 분석으로 연속 기록을 의미 단위 이벤트로 요약</div></div>
+        <div class="dp-step"><span class="icon-xl">🏷️</span><div><b>Tag</b> — 각 이벤트에 대해 활동·장소·객체 메타데이터 자동 태깅</div></div>
+        <div class="dp-step"><span class="icon-xl">🗂️</span><div><b>Store</b> — JSONL + 대표 프레임 구조로 저장(🔒이미지 원본 저장은 선택적)</div></div>
       </div>
 
       <!-- 우: JSON 예시 -->
@@ -440,7 +423,7 @@
         <p class="q">💬 <b>“어제 청소를 했었나?”</b></p>
         <p class="a">🤖 네, 어제 9시 13분부터 38분까지 총 25분동안 주로 거실
 과 주방을 진공청소기를 사용하여 청소하셨습니다. </p>
-        <img class="chat-thumb" src="static/images/q_time_thumb.png" alt="timeline result">
+        <img class="chat-thumb" src="static/images/result1.jpg" alt="timeline result">
         <small>요약에서 해당 시간대 이벤트만 집계</small>
       </div>
 
@@ -449,14 +432,14 @@
         <p class="a">🤖 저번 달에는 한식을 15번, 일식을 9번, 중식을 3번 드셨습
 니다. 주로 김치와 구운 고기가 포함된 한국식 가정식을 자주 
 즐기셨습니다.</p>
-        <img class="chat-thumb" src="static/images/q_clean_thumb.png" alt="vacuum result">
+        <img class="chat-thumb" src="static/images/result2.jpg" alt="vacuum result">
       </div>
 
       <div class="chat">
         <p class="q">💬 <b>“그저께 게임 얼마나 했어?”</b></p>
         <p class="a">🤖 그저께 14시 10분부터 18시 33분까지 총 4시간 23분 동
 안 컴퓨터로리그 오브 레전드(MOBA) 게임을 하셨습니다.</p>
-        <img class="chat-thumb" src="static/images/q_cook_thumb.png" alt="cooking result">
+        <img class="chat-thumb" src="static/images/result3.jpg" alt="cooking result">
       </div>
 
       <div class="chat">
@@ -465,7 +448,7 @@
 거실 쇼파에서 TV 시청: 3시간 05분
 컴퓨터 앞에서 업무: 2시간 13분
 가장 오래 한 활동은 거실에서 TV 시청을 하신 활동입니다.</p>
-        <img class="chat-thumb" src="static/images/q_kimchi_thumb.png" alt="kimchi result">
+        <img class="chat-thumb" src="static/images/result4.jpg" alt="kimchi result">
       </div>
     </div>
   </div>
