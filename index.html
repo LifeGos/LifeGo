@@ -162,7 +162,7 @@
     <div class="hero-body">
       <div class="container">
         <h2 class="title is-3">Pipeline</h2>
-        <div id="results-carousel-1" class="carousel results-carousel">
+        <div>
           <div class="item">
             <img src="static/images/pipeline.png" alt="Multimodal capture from egocentric AR glasses">
             <p class="subtitle has-text-centered">This pipeline captures visual, spatial, and audio data from wearable devices, processes them into an egocentric context using vision, spatial, and audio analysis, and summarizes them into chronological events for easy review of daily activities.</p>
@@ -215,21 +215,33 @@
         <div id="results-carousel-2" class="carousel results-carousel">
           <div class="item item-video1">
             <video id="video1" autoplay controls muted loop playsinline style="width:100%;">
-              <source src="static/videos/data1.mp4" type="video/mp4">
+              <source src="static/videos/data_cleaning.mp4" type="video/mp4">
             </video>
-            <p class="has-text-centered">실시간 이미지 캡션 & 키프레임 요약 (BLIP3o)</p>
+            <p class="has-text-centered">data_cleaning</p>
           </div>
           <div class="item item-video2">
             <video id="video2" autoplay controls muted loop playsinline style="width:100%;">
-              <source src="static/videos/carousel2.mp4" type="video/mp4">
+              <source src="static/videos/data_eating.mp4" type="video/mp4">
             </video>
-            <p class="has-text-centered">음성 STT + 시간 스탬프 (Whisper)</p>
+            <p class="has-text-centered">data_eating</p>
           </div>
           <div class="item item-video3">
             <video id="video3" autoplay controls muted loop playsinline style="width:100%;">
-              <source src="static/videos/carousel3.mp4" type="video/mp4">
+              <source src="static/videos/data_refrigerator.mp4" type="video/mp4">
             </video>
-            <p class="has-text-centered">WebXR 재생: 경로/앵커/대표 이미지</p>
+            <p class="has-text-centered">data_refrigerator</p>
+          </div>
+          <div class="item item-video3">
+            <video id="video3" autoplay controls muted loop playsinline style="width:100%;">
+              <source src="static/videos/data_computer game.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered">data_computer game</p>
+          </div>
+          <div class="item item-video3">
+            <video id="video3" autoplay controls muted loop playsinline style="width:100%;">
+              <source src="static/videos/data_cat.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered">data_cat</p>
           </div>
         </div>
       </div>
@@ -240,33 +252,56 @@
   <!-- ===== End YouTube ===== -->
 
   <!-- ===== Video carousel (feature demos) ===== -->
-  <section class="hero is-small">
-    <div class="hero-body">
-      <div class="container">
-        <h2 class="title is-3">Feature Demos</h2>
-        <div id="results-carousel-2" class="carousel results-carousel">
-          <div class="item item-video1">
-            <video id="video1" autoplay controls muted loop playsinline style="width:100%;">
-              <source src="static/videos/carousel1.mp4" type="video/mp4">
-            </video>
-            <p class="has-text-centered">실시간 이미지 캡션 & 키프레임 요약 (BLIP3o)</p>
-          </div>
-          <div class="item item-video2">
-            <video id="video2" autoplay controls muted loop playsinline style="width:100%;">
-              <source src="static/videos/carousel2.mp4" type="video/mp4">
-            </video>
-            <p class="has-text-centered">음성 STT + 시간 스탬프 (Whisper)</p>
-          </div>
-          <div class="item item-video3">
-            <video id="video3" autoplay controls muted loop playsinline style="width:100%;">
-              <source src="static/videos/carousel3.mp4" type="video/mp4">
-            </video>
-            <p class="has-text-centered">WebXR 재생: 경로/앵커/대표 이미지</p>
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Feature Demos</h2>
+      <div id="results-carousel-2" class="carousel results-carousel">
+
+        <!-- 첫 번째 비디오 -->
+        <div class="item item-video1">
+          <video id="video1" autoplay controls muted loop playsinline style="width:100%;">
+            <source src="static/videos/box.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">
+            <p class="has-text-centered"><b>box</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              SpatialLM을 이용한 공간 바운딩박스를 WebXR에 시각화할 수 있는 버튼입니다.
+            </p>
           </div>
         </div>
+
+        <!-- 두 번째 비디오 -->
+        <div class="item item-video2">
+          <video id="video2" autoplay controls muted loop playsinline style="width:100%;">
+            <source src="static/videos/log.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">
+            <p class="has-text-centered"><b>log</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              사용자 전체 활동 로그를 조회할 수 있습니다. 특정 이벤트에 대한 이미지와 라이프로그를 검색할 수도 있습니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 세 번째 비디오 -->
+        <div class="item item-video3">
+          <video id="video3" autoplay controls muted loop playsinline style="width:100%;">
+            <source src="static/videos/query.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">
+            <p class="has-text-centered"><b>query</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              자연어 질의를 통해 해당 질문에 대한 답변을 도출합니다. 또한, 저장된 라이프로그를 시각화합니다.(이동경로, 이벤트 이미지)
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
   <!-- ===== End Video carousel ===== -->
 
 <section class="section">
@@ -346,13 +381,13 @@
       </div>
       <div class="kpi-card">
         <div class="badge">Storage</div>
-        <div class="kpi-metric">25 KB/day</div>
+        <div class="kpi-metric">약 25 KB/event</div>
         <div class="muted">요약 JSONL 기준</div>
       </div>
       <div class="kpi-card">
-        <div class="badge">QA hit@1</div>
-        <div class="kpi-metric">90%</div>
-        <div class="muted">소규모 매뉴얼 평가</div>
+        <div class="badge">Realtime QA</div>
+        <div class="kpi-metric">Streaming Mode</div>
+        <div class="muted">실시간 응답 지원</div>
       </div>
       <div class="kpi-card">
         <div class="badge">Devices</div>
@@ -386,8 +421,9 @@
       <!-- 우: JSON 예시 -->
       <pre><code>{
         "time_range": "2025-08-12T12:02:10~12:07:45",
-        "summary": "주방에서 진공청소기 사용",
-        "tags": ["cleaning","vacuum","kitchen"],
+        "summary": "The user appears to be doing a cleaning operation on the TV and near the TV cabinet, as shown by the vacuum cleaner and pet food bowl on the wooden floor. The user's hand is holding the vacuum cleaner, suggesting that it is preparing to use it or has just finished using it. Body posture refers to a tilted forward position in which someone seems to be actively cleaning. The surroundings include a well-lit indoor space with glossy wood floors, a pet food bowl, and some of the furniture that you can see in the corner. The background noise is making a vacuum cleaner sound. Human voices are not heard. \n\nRelated Activity Tags: ['using vaccum cleaner','cleaning']",
+        "사용자가 TV와 TV 캐비넷 근처에서 청소 활동을 하고 있는 것으로 보이며, 이는 나무 바닥에 진공청소기와 애완동물 사료 그릇이 있는 것에서 알 수 있습니다. 사용자의 손이 진공청소기를 잡고 있어 사용을 준비 중이거나 방금 사용을 마쳤음을 시사합니다. 신체 자세는 누군가 적극적으로 청소하는 것처럼 보이는 앞으로 기울어진 자세를 나타냅니다. 주변 환경에는 광택이 나는 나무 바닥이 있는 조명이 잘 켜진 실내 공간, 애완동물 사료 그릇, 구석에 보이는 가구 일부가 포함되어 있습니다. 배경 소음은 청소기 소리가 나고 있습니다. 사람의 음성은 들리지 않습니다. \n\n관련 활동 태그: ['청소', '청소기 사용']",
+        "tags": ["cleaning","using vacum cleaner","tv cabinet"],
         "image": "images/20250812_120510.jpg"
       }</code></pre>
     </div>
@@ -401,34 +437,41 @@
 
     <div class="qa-grid">
       <div class="chat">
-        <p class="q">💬 <b>“어제 19:00–21:00 컴퓨터 사용 패턴”</b></p>
-        <p class="a">🤖 세션 3개, 평균 27분/세션. 가장 긴 세션 54분(20:06–21:00).</p>
+        <p class="q">💬 <b>“어제 청소를 했었나?”</b></p>
+        <p class="a">🤖 네, 어제 9시 13분부터 38분까지 총 25분동안 주로 거실
+과 주방을 진공청소기를 사용하여 청소하셨습니다. </p>
         <img class="chat-thumb" src="static/images/q_time_thumb.png" alt="timeline result">
         <small>요약에서 해당 시간대 이벤트만 집계</small>
       </div>
 
       <div class="chat">
-        <p class="q">💬 <b>“청소기 돌렸었나?”</b></p>
-        <p class="a">🤖 20:13–20:22 사용. 전후 10분 요약 제공.</p>
+        <p class="q">💬 <b>“저번 달에 자주 먹었던 음식이 뭐야?”</b></p>
+        <p class="a">🤖 저번 달에는 한식을 15번, 일식을 9번, 중식을 3번 드셨습
+니다. 주로 김치와 구운 고기가 포함된 한국식 가정식을 자주 
+즐기셨습니다.</p>
         <img class="chat-thumb" src="static/images/q_clean_thumb.png" alt="vacuum result">
       </div>
 
       <div class="chat">
-        <p class="q">💬 <b>“주방에서 요리한 이벤트만”</b></p>
-        <p class="a">🤖 cooking@kitchen 4건. 대표 프레임 링크 제공.</p>
+        <p class="q">💬 <b>“그저께 게임 얼마나 했어?”</b></p>
+        <p class="a">🤖 그저께 14시 10분부터 18시 33분까지 총 4시간 23분 동
+안 컴퓨터로리그 오브 레전드(MOBA) 게임을 하셨습니다.</p>
         <img class="chat-thumb" src="static/images/q_cook_thumb.png" alt="cooking result">
       </div>
 
       <div class="chat">
-        <p class="q">💬 <b>“김치 관련”</b></p>
-        <p class="a">🤖 객체→활동 맵핑 보정으로 섭취 이벤트 2건 반환.</p>
+        <p class="q">💬 <b>“오늘 집에서 어떤 활동을 가장 오래 했어?”</b></p>
+        <p class="a">🤖 주방에서 요리 및 설거지: 42분
+거실 쇼파에서 TV 시청: 3시간 05분
+컴퓨터 앞에서 업무: 2시간 13분
+가장 오래 한 활동은 거실에서 TV 시청을 하신 활동입니다.</p>
         <img class="chat-thumb" src="static/images/q_kimchi_thumb.png" alt="kimchi result">
       </div>
     </div>
   </div>
 </section>
 
-
+<!-- 
 <section class="section">
   <div class="container">
     <h2 class="title is-3">Results</h2>
@@ -451,7 +494,7 @@
       </table>
     </div>
   </div>
-</section>
+</section> -->
 
 
   <!-- ===== Links & Contact ===== -->
@@ -475,7 +518,7 @@
     <div class="hero-body">
       <div class="container">
         <h2 class="title">Poster</h2>
-        <iframe src="static/pdfs/sample.pdf" width="100%" height="850" title="Poster PDF"></iframe>
+        <iframe src="static/pdfs/2025 CDE 하계학술대회 poster_김세훈_v5.pdf" width="100%" height="850" title="Poster PDF"></iframe>
       </div>
     </div>
   </section>
