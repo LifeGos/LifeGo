@@ -130,7 +130,7 @@
     <div class="container is-max-desktop">
       <div class="hero-body">
         <video id="banner-video" autoplay controls muted loop playsinline style="width:100%;max-height:70vh;">
-          <source src="static/videos/box.mp4" type="video/mp4">
+          <source src="static/videos/demo.mp4" type="video/mp4">
         </video>
         <h2 class="subtitle has-text-centered">
           A lifelogging system that captures daily experiences from a first-person perspective, summarizes multimodal data, and replays them spatially in WebXR.
@@ -248,7 +248,6 @@
     </div>
   </section>
 
-
   
   <!-- ===== Video carousel (feature demos) ===== -->
 <section class="hero is-small">
@@ -259,7 +258,7 @@
 
         <!-- 첫 번째 비디오 -->
         <div class="item item-video1">
-          <video id="video1" autoplay controls muted loop playsinline style="width:130%;">
+          <video id="video1" autoplay controls muted loop playsinline style="width:100%;">
             <source src="static/videos/box.mp4" type="video/mp4">
           </video>
           <div class="video-caption">
@@ -272,7 +271,7 @@
 
         <!-- 두 번째 비디오 -->
         <div class="item item-video2">
-          <video id="video2" autoplay controls muted loop playsinline style="width:160%;">
+          <video id="video2" autoplay controls muted loop playsinline style="width:100%;">
             <source src="static/videos/log.mp4" type="video/mp4">
           </video>
           <div class="video-caption">
@@ -368,56 +367,19 @@
       </div>
 
       <!-- 5) Lightweight Web Stack -->
-
+      <div class="feature-card">
+        <div class="feature-title-box">Lightweight Web Stack</div>
+        <p class="muted">Node.js + Python + WebXR (A-Frame/Three.js)</p>
+      </div>
     </div>
   </div>
 </section>
-
-
-<section class="section is-light">
-  <div class="container">
-    <h2 class="title is-3">System Specs</h2>
-
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="badge">Latency</div>
-        <div class="kpi-metric">5.8 ms</div>
-        <div class="muted">이미지 캡션/프레임</div>
-      </div>
-      <div class="kpi-card">
-        <div class="badge">Storage</div>
-        <div class="kpi-metric">약 20 KB/event</div>
-        <div class="muted">요약 JSONL 기준</div>
-      </div>
-      <div class="kpi-card">
-        <div class="badge">Realtime QA</div>
-        <div class="kpi-metric">Streaming Mode</div>
-        <div class="muted">실시간 응답 지원</div>
-      </div>
-      <div class="kpi-card">
-        <div class="badge">Devices</div>
-        <div class="kpi-metric">AR + HMD</div>
-        <div class="muted">AR 글래스 / Quest 3 / Vision Pro</div>
-      </div>
-    </div>
-
-    <ul class="mt-3">
-      <li><b>Hardware</b>: HMD(Quest 3), 안경형 AR 글래스</li>
-      <li><b>Software</b>: Node.js / Python 3.10 / MariaDB, A-Frame · Three.js(WebXR)</li>
-      <li><b>Models</b>: BLIP3o(Qwen2.5-VL-7B-Instruct), Whisper, YaMNet, SpatialLM, gpt-4o</li>
-      <li><b>Formats</b>: <code>event_summaries_YYYY_MM_DD.jsonl</code> + 대표 프레임/썸네일</li>
-    </ul>
-  </div>
-</section>
-
-
-
 
 
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Feature Demos</h2>
+      <h2 class="title is-3">Spatial Mapping</h2>
       <div id="results-carousel-2" class="carousel results-carousel">
 
         <!-- 첫 번째 비디오 -->
@@ -463,6 +425,53 @@
     </div>
   </div>
 </section>
+
+
+
+
+
+
+<section class="section is-light">
+  <div class="container">
+    <h2 class="title is-3">System Specs</h2>
+
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="badge">Latency</div>
+        <div class="kpi-metric">5.8 ms</div>
+        <div class="muted">이미지 캡션/프레임</div>
+      </div>
+      <div class="kpi-card">
+        <div class="badge">Storage</div>
+        <div class="kpi-metric">약 20 KB/event</div>
+        <div class="muted">요약 JSONL 기준</div>
+      </div>
+      <div class="kpi-card">
+        <div class="badge">Realtime QA</div>
+        <div class="kpi-metric">Streaming Mode</div>
+        <div class="muted">실시간 응답 지원</div>
+      </div>
+      <div class="kpi-card">
+        <div class="badge">Devices</div>
+        <div class="kpi-metric">AR + HMD</div>
+        <div class="muted">AR 글래스 / Quest 3 / Vision Pro</div>
+      </div>
+    </div>
+
+    <ul class="mt-3">
+      <li><b>Hardware</b>: HMD(Quest 3), 안경형 AR 글래스</li>
+      <li><b>Software</b>: Node.js / Python 3.10 / MariaDB, A-Frame · Three.js(WebXR)</li>
+      <li><b>Models</b>: BLIP3o(Qwen2.5-VL-7B-Instruct), Whisper, YaMNet, SpatialLM, gpt-4o</li>
+      <li><b>Formats</b>: <code>event_summaries_YYYY_MM_DD.jsonl</code> + 대표 프레임/썸네일</li>
+    </ul>
+  </div>
+</section>
+
+
+
+
+
+
 
 
 
