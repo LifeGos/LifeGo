@@ -133,7 +133,7 @@
           <source src="static/videos/demo.mp4" type="video/mp4">
         </video>
         <h2 class="subtitle has-text-centered">
-          A life logging system that summarizes and retrieves multimodal data collected from a first-person field of view and spatially reproduces it with WebXR.
+          A lifelogging system that captures daily experiences from a first-person perspective, summarizes multimodal data, and replays them spatially in WebXR.
         </h2>
       </div>
     </div>
@@ -263,6 +263,12 @@
           <video id="video1" autoplay controls muted loop playsinline style="width:100%;">
             <source src="static/videos/box.mp4" type="video/mp4">
           </video>
+          <div class="video-caption">
+            <p class="has-text-centered"><b>box</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              SpatialLM을 이용해 생성한 바운딩박스를 WebXR에 시각화할 수 있는 버튼입니다.
+            </p>
+          </div>
         </div>
 
         <!-- 두 번째 비디오 -->
@@ -270,7 +276,12 @@
           <video id="video2" autoplay controls muted loop playsinline style="width:100%;">
             <source src="static/videos/log.mp4" type="video/mp4">
           </video>
-
+          <div class="video-caption">
+            <p class="has-text-centered"><b>log</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              사용자 전체 활동 로그를 조회할 수 있습니다. 특정 이벤트에 대한 이미지와 라이프로그를 검색할 수도 있습니다.
+            </p>
+          </div>
         </div>
 
         <!-- 세 번째 비디오 -->
@@ -278,6 +289,12 @@
           <video id="video3" autoplay controls muted loop playsinline style="width:100%;">
             <source src="static/videos/query.mp4" type="video/mp4">
           </video>
+          <div class="video-caption">
+            <p class="has-text-centered"><b>query</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              자연어 질의를 통해 해당 질문에 대한 답변을 도출합니다. 또한, 저장된 라이프로그를 시각화합니다.(이동경로, 이벤트 이미지)
+            </p>
+          </div>
         </div>
 
       </div>
@@ -287,6 +304,41 @@
 
   <!-- ===== End Video carousel ===== -->
 
+<style>
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+  height: 100%; /* 균일한 높이 유지 */
+}
+
+.feature-title-box {
+  background: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.feature-body p {
+  flex-grow: 1; /* 설명이 카드 안에서 균등 분배 */
+  margin: 0;
+}
+</style>
+
+
 <section class="section">
   <div class="container">
     <h2 class="title is-3">Key Features</h2>
@@ -294,59 +346,30 @@
     <div class="features-grid">
       <!-- 1) Multimodal -->
       <div class="feature-card">
-        <div class="feature-media">
-          <!-- BLIP3o 캡션 데모 GIF/PNG로 교체 -->
-          <img src="static/images/feat_blip3o.gif" alt="BLIP3o caption demo">
-        </div>
-        <div class="feature-body">
-          <h3>Multimodal Understanding</h3>
-          <p class="muted">BLIP3o(이미지→텍스트) + Whisper(STT) + YaMNet(환경음) + SpatialLM(공간이해)</p>
-        </div>
+        <div class="feature-title-box">Multimodal Understanding</div>
+        <p class="muted">BLIP3o(이미지→텍스트) + Whisper(STT) + YaMNet(환경음) + SpatialLM(공간이해)</p>
       </div>
 
       <!-- 2) Event-centric Storage -->
       <div class="feature-card">
-        <div class="feature-media">
-          <img src="static/images/feat_event.png" alt="Event JSONL">
-        </div>
-        <div class="feature-body">
-          <h3>Event-centric Storage</h3>
-          <p class="muted">요약 JSONL + 대표 프레임만 저장 → 저장량 절감</p>
-        </div>
+        <div class="feature-title-box">Event-centric Storage</div>
+        <p class="muted">요약 JSONL + 대표 프레임만 저장 → 저장량 절감</p>
       </div>
 
       <!-- 3) Spatial Replay -->
       <div class="feature-card">
-        <div class="feature-media">
-          <img src="static/images/feat_xr.gif" alt="WebXR playback">
-        </div>
-        <div class="feature-body">
-          <h3>Spatial Replay</h3>
-          <p class="muted">WebXR 타임라인·앵커·경로로 기억을 공간적으로 재생</p>
-        </div>
+        <div class="feature-title-box">Spatial Replay</div>
+        <p class="muted">WebXR 타임라인·앵커·경로로 기억을 공간적으로 재생</p>
       </div>
 
-      <!-- 5) Live Query -->
+      <!-- 4) Live Query -->
       <div class="feature-card">
-        <div class="feature-media">
-          <img src="static/images/feat_query.gif" alt="Live query">
-        </div>
-        <div class="feature-body">
-          <h3>Live Query</h3>
-          <p class="muted">“청소기 돌렸었나?” 같은 질문에 시간대/이벤트 즉시 검색</p>
-        </div>
+        <div class="feature-title-box">Live Query</div>
+        <p class="muted">“청소기 돌렸었나?” 같은 질문에 시간대/이벤트 즉시 검색</p>
       </div>
 
-      <!-- 6) Lightweight Web Stack -->
-      <div class="feature-card">
-        <div class="feature-media">
-          <img src="static/images/feat_stack.png" alt="Web stack">
-        </div>
-        <div class="feature-body">
-          <h3>Lightweight Web Stack</h3>
-          <p class="muted">Node.js + Python + WebXR (A-Frame/Three.js)</p>
-        </div>
-      </div>
+      <!-- 5) Lightweight Web Stack -->
+
     </div>
   </div>
 </section>
@@ -389,6 +412,63 @@
 </section>
 
 
+
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Feature Demos</h2>
+      <div id="results-carousel-2" class="carousel results-carousel">
+
+        <!-- 첫 번째 비디오 -->
+        <div class="item item-video1">
+          <video id="video1" autoplay controls muted loop playsinline style="width:100%;">
+            <source src="static/videos/box.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">
+            <p class="has-text-centered"><b>box</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              수집된 포인트 클라우드를 SpatialLM을 활용해 바운딩 박스 좌표 생성 
+            </p>
+          </div>
+        </div>
+
+        <!-- 두 번째 비디오 -->
+        <div class="item item-video2">
+          <video id="video2" autoplay controls muted loop playsinline style="width:100%;">
+            <source src="static/videos/log.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">
+            <p class="has-text-centered"><b>log</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              사용자 전체 활동 로그를 조회할 수 있습니다. 특정 이벤트에 대한 이미지와 라이프로그를 검색할 수도 있습니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 세 번째 비디오 -->
+        <div class="item item-video3">
+          <video id="video3" autoplay controls muted loop playsinline style="width:100%;">
+            <source src="static/videos/query.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">
+            <p class="has-text-centered"><b>query</b></p>
+            <p class="has-text-centered is-size-5 has-text-grey">
+              자연어 질의를 통해 해당 질문에 대한 답변을 도출합니다. 또한, 저장된 라이프로그를 시각화합니다.(이동경로, 이벤트 이미지)
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
 <section class="section">
   <div class="container">
     <h2 class="title is-3">Data & Privacy</h2>
@@ -421,33 +501,32 @@
     <div class="qa-grid">
       <div class="chat">
         <p class="q">💬 <b>“어제 청소를 했었나?”</b></p>
-        <p class="a">🤖 네, 어제 9시 13분부터 38분까지 총 25분동안 주로 거실
-과 주방을 진공청소기를 사용하여 청소하셨습니다. </p>
+        <p class="a">🤖 네, 어제 9시 13분부터 38분까지 총 25분동안 주로 거실과 주방을 진공청소기를 사용하여 청소하셨습니다. </p>
         <img class="chat-thumb" src="static/images/result1.jpg" alt="timeline result">
         <small>요약에서 해당 시간대 이벤트만 집계</small>
       </div>
 
       <div class="chat">
         <p class="q">💬 <b>“저번 달에 자주 먹었던 음식이 뭐야?”</b></p>
-        <p class="a">🤖 저번 달에는 한식을 15번, 일식을 9번, 중식을 3번 드셨습
-니다. 주로 김치와 구운 고기가 포함된 한국식 가정식을 자주 
-즐기셨습니다.</p>
+        <p class="a">🤖 저번 달에는 한식을 15번, 일식을 9번, 중식을 3번 드셨습니다. 주로 김치와 구운 고기가 포함된 한국식 가정식을 자주 즐기셨습니다.</p>
         <img class="chat-thumb" src="static/images/result2.jpg" alt="vacuum result">
       </div>
 
       <div class="chat">
         <p class="q">💬 <b>“그저께 게임 얼마나 했어?”</b></p>
-        <p class="a">🤖 그저께 14시 10분부터 18시 33분까지 총 4시간 23분 동
-안 컴퓨터로리그 오브 레전드(MOBA) 게임을 하셨습니다.</p>
+        <p class="a">🤖 그저께 14시 10분부터 18시 33분까지 총 4시간 23분 동안 컴퓨터로 리그 오브 레전드(MOBA) 게임을 하셨습니다.</p>
         <img class="chat-thumb" src="static/images/result3.jpg" alt="cooking result">
       </div>
 
       <div class="chat">
         <p class="q">💬 <b>“오늘 집에서 어떤 활동을 가장 오래 했어?”</b></p>
-        <p class="a">🤖 주방에서 요리 및 설거지: 42분
-거실 쇼파에서 TV 시청: 3시간 05분
-컴퓨터 앞에서 업무: 2시간 13분
-가장 오래 한 활동은 거실에서 TV 시청을 하신 활동입니다.</p>
+      <p class="a">
+        🤖 주방에서 요리 및 설거지: 42분,
+        거실 쇼파에서 TV 시청: 3시간 05분,
+        컴퓨터 앞에서 업무: 2시간 13분으로
+        가장 긴 시간동안 하신 활동은 TV를 시청한 것이었습니다.
+      </p>
+
         <img class="chat-thumb" src="static/images/result4.jpg" alt="kimchi result">
       </div>
     </div>
@@ -533,9 +612,6 @@
             <p>
               This page was built using the
               <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template</a>
-              which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener noreferrer">Nerfies</a> project page.
-              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer.
-              <br>
               This website is licensed under a
               <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">
                 Creative Commons Attribution-ShareAlike 4.0 International License
