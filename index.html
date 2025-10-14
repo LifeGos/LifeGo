@@ -584,91 +584,8 @@
   </section> -->
 
 
-    <!-- ===== Poster (PDF embed) ===== -->
-  <section class="hero is-small is-light">
-    <div class="hero-body">
-      <div class="container">
-        <h2 class="title">Poster</h2>
-        <iframe src="static/pdfs/2025 CDE 하계학술대회 poster_김세훈_v5.pdf" width="100%" height="850" title="Poster PDF"></iframe>
-      </div>
-    </div>
-  </section>
-  <!-- ===== End Poster ===== -->
 
-
-
-  <!-- ===== BibTeX ===== -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@inproceedings{kim2025lifego,
-  title={LifeGo: Egocentric XR Lifelogging for a Digital Twin of Experience},
-  author={Kim, Sehoon and Na, Kunyeol and Yoo, Byounghyun},
-  booktitle={Proceedings of ...},
-  year={2025}
-}</code></pre>
-    </div>
-  </section>
-
-
-
-  <!-- ===== Footer ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-              This page was built using the
-              <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template</a>
-              This website is licensed under a
-              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">
-                Creative Commons Attribution-ShareAlike 4.0 International License
-              </a>.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ===== Init carousels (Bulma) ===== -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (bulmaCarousel) {
-        try {
-          bulmaCarousel.attach('#results-carousel-1', { slidesToScroll: 1, slidesToShow: 1, loop: true, autoplay: false });
-          bulmaCarousel.attach('#results-carousel-2', { slidesToScroll: 1, slidesToShow: 1, loop: true, autoplay: false });
-        } catch (e) { console.warn('Carousel init failed:', e); }
-      }
-    });
-  </script>
-
-</body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>인터랙티브 라이프로깅 시스템 아키텍처</title>
@@ -1072,4 +989,62 @@
         });
     </script>
 </body>
+
+
+
+
+    <!-- ===== Poster (PDF embed) ===== -->
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title">Poster</h2>
+        <iframe src="static/pdfs/2025 CDE 하계학술대회 poster_김세훈_v5.pdf" width="100%" height="850" title="Poster PDF"></iframe>
+      </div>
+    </div>
+  </section>
+  <!-- ===== End Poster ===== -->
+
+
+
+  <!-- ===== BibTeX ===== -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{kim2025lifego,
+  title={LifeGo: Egocentric XR Lifelogging for a Digital Twin of Experience},
+  author={Kim, Sehoon and Na, Kunyeol and Yoo, Byounghyun},
+  booktitle={Proceedings of ...},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ===== Init carousels (Bulma) ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (bulmaCarousel) {
+        try {
+          bulmaCarousel.attach('#results-carousel-1', { slidesToScroll: 1, slidesToShow: 1, loop: true, autoplay: false });
+          bulmaCarousel.attach('#results-carousel-2', { slidesToScroll: 1, slidesToShow: 1, loop: true, autoplay: false });
+        } catch (e) { console.warn('Carousel init failed:', e); }
+      }
+    });
+  </script>
+
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
