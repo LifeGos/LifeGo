@@ -645,4 +645,431 @@
   </script>
 
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터랙티브 라이프로깅 시스템 아키텍처</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Tech -->
+    <!-- Application Structure Plan: The application is designed as a top-to-bottom "Dataflow" journey, mirroring the path data takes through the system. This linear, scroll-based structure is highly intuitive for understanding a process-oriented architecture. It starts with an overview, then sequentially details each of the four layers: Acquisition, Generation, Storage/Compression, and Search. Key interactions are strategically placed at the most complex stages (Log Generation, Compression, and Search) to allow users to actively engage with the core logic, such as simulating log creation, adjusting the compression threshold via a slider to see real-time grouping, and simulating a natural language query. This structure was chosen over a static dashboard because it tells a story, guiding the user through the system's functions in a logical, step-by-step manner, which enhances comprehension and retention. -->
+    <!-- Visualization & Content Choices: 
+        - System Overview: Goal=Organize, Method=HTML/CSS interactive diagram, Interaction=Click to scroll to section, Justification=Provides a high-level map and navigation.
+        - Data Acquisition: Goal=Inform, Method=HTML/CSS icon cards, Interaction=Hover for details, Justification=Cleanly presents sensor types.
+        - Log Generation: Goal=Explain Process, Method=HTML content swap, Interaction=Button click to simulate multimodal data fusion, Justification=Makes the abstract concept of log integration tangible.
+        - Data Compression: Goal=Explain Algorithm, Method=Chart.js Bar Chart + HTML Slider, Interaction=Slider adjusts similarity threshold, dynamically regrouping logs in the chart, Justification=The most effective way to demonstrate the core logic of semantic compression interactively.
+        - Search & Exploration: Goal=Explain Process, Method=HTML mock search interface with JS animation, Interaction=Button click triggers a step-by-step animation of the search process, Justification=Visually deconstructs the query-to-answer pipeline for clarity.
+        - Libraries: Chart.js for the compression visualization on a Canvas. No SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f7f4;
+            color: #3a3a3a;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #d1d5db;
+            margin: 1rem 0;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            transform: translateY(-4px);
+        }
+        .nav-button {
+            background-color: #e5e7eb;
+            color: #374151;
+            transition: all 0.2s ease;
+        }
+        .nav-button:hover {
+            background-color: #9ca3af;
+            color: #ffffff;
+        }
+        .module-box {
+            border: 2px dashed #d1d5db;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">XR 라이프로깅 시스템</h1>
+            <p class="text-lg text-gray-600">데이터의 수집부터 검색까지, 전 과정을 인터랙티브하게 탐색해보세요.</p>
+        </header>
+
+        <main>
+            <section id="overview" class="mb-16">
+                <div class="card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-center mb-6">시스템 전체 구조</h2>
+                    <p class="text-center text-gray-600 mb-8">
+                        이 시스템은 4개의 주요 계층으로 구성되어 있습니다. 각 계층은 XR 글래스를 통해 수집된 사용자의 일상 데이터를 처리, 저장하고 의미있는 정보로 변환하여 제공하는 역할을 합니다. 아래 다이어그램의 각 계층을 클릭하면 해당 섹션으로 이동하여 더 자세한 내용을 확인할 수 있습니다.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                        <div class="p-4 rounded-lg cursor-pointer nav-button" onclick="document.getElementById('acquisition').scrollIntoView({behavior: 'smooth'});">
+                            <span class="text-4xl">📥</span>
+                            <h3 class="font-bold mt-2">1. 데이터 수집</h3>
+                            <p class="text-sm">XR 글래스 센서</p>
+                        </div>
+                        <div class="p-4 rounded-lg cursor-pointer nav-button" onclick="document.getElementById('generation').scrollIntoView({behavior: 'smooth'});">
+                            <span class="text-4xl">🧠</span>
+                            <h3 class="font-bold mt-2">2. 로그 생성</h3>
+                            <p class="text-sm">멀티모달 상황 인지</p>
+                        </div>
+                        <div class="p-4 rounded-lg cursor-pointer nav-button" onclick="document.getElementById('compression').scrollIntoView({behavior: 'smooth'});">
+                            <span class="text-4xl">🗄️</span>
+                            <h3 class="font-bold mt-2">3. 저장 및 압축</h3>
+                            <p class="text-sm">의미 기반 이벤트 압축</p>
+                        </div>
+                        <div class="p-4 rounded-lg cursor-pointer nav-button" onclick="document.getElementById('search').scrollIntoView({behavior: 'smooth'});">
+                            <span class="text-4xl">🔍</span>
+                            <h3 class="font-bold mt-2">4. 검색 및 탐색</h3>
+                            <p class="text-sm">자연어 기반 검색</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="flex justify-center items-center flow-arrow">↓</div>
+
+            <section id="acquisition" class="mb-16 scroll-mt-20">
+                <div class="card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-6">1. 데이터 수집 계층</h2>
+                    <p class="text-gray-600 mb-8">
+                        모든 라이프로그는 XR 글래스에 내장된 센서로부터 시작됩니다. 이 센서들은 사용자의 주변 환경과 행동에 대한 원시 데이터를 실시간으로 수집하여 다음 계층으로 전송합니다. 각 센서 카드에 마우스를 올려 어떤 데이터가 수집되는지 확인해보세요.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="p-6 border rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="text-4xl mb-3">📷</div>
+                            <h3 class="font-semibold text-lg">카메라</h3>
+                            <p class="text-gray-500">패스스루 영상을 통해 사용자가 보는 장면을 기록합니다. (공간 및 객체 인식의 기반)</p>
+                        </div>
+                        <div class="p-6 border rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="text-4xl mb-3">🏃‍♂️</div>
+                            <h3 class="font-semibold text-lg">IMU</h3>
+                            <p class="text-gray-500">관성 측정 장치로, 사용자의 머리 움직임과 이동 경로를 추적합니다. (이동 문맥 파악)</p>
+                        </div>
+                        <div class="p-6 border rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="text-4xl mb-3">🎤</div>
+                            <h3 class="font-semibold text-lg">마이크</h3>
+                            <p class="text-gray-500">사용자의 발화와 주변 소리를 녹음합니다. (대화 및 청각 문맥 파악)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-center items-center flow-arrow">↓</div>
+
+            <section id="generation" class="mb-16 scroll-mt-20">
+                <div class="card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-6">2. 원시/통합 로그 생성 계층</h2>
+                    <p class="text-gray-600 mb-8">
+                        수집된 각기 다른 형태의 원시 데이터(영상, 움직임, 소리)는 '멀티모달 상황 인지 모듈'에서 종합적으로 분석됩니다. 각 데이터는 독립적으로 처리되어 문맥 정보로 변환된 후, 멀티모달 LLM을 통해 하나의 통합된 텍스트 로그로 생성됩니다. 아래 버튼을 클릭하여 시뮬레이션 과정을 확인해보세요.
+                    </p>
+                    <div class="module-box">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+                            <div id="raw-data-display" class="col-span-1 lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 border rounded-md bg-gray-50">
+                                <div><h4 class="font-bold">영상 🖼️</h4><p id="context-video" class="text-sm text-gray-700 mt-1">거실 소파와 TV가 보임</p></div>
+                                <div><h4 class="font-bold">IMU 🧭</h4><p id="context-imu" class="text-sm text-gray-700 mt-1">소파 근처에서 약간의 움직임 감지</p></div>
+                                <div><h4 class="font-bold">음성 🗣️</h4><p id="context-audio" class="text-sm text-gray-700 mt-1">주변 소리: 키보드 타이핑</p></div>
+                            </div>
+                            <button id="generate-log-btn" class="w-full h-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">통합 로그 생성 →</button>
+                        </div>
+                        <div class="mt-4 p-4 border rounded-md bg-green-50">
+                            <h4 class="font-bold text-green-800">결과: 통합 멀티모달 라이프로그 (10초)</h4>
+                            <p id="integrated-log" class="text-green-900 mt-1 h-12">[2025-10-15 02:21:10] 거실 소파 근처에 앉아 TV를 보면서 키보드를 치고 있는 것으로 보임.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-center items-center flow-arrow">↓</div>
+
+            <section id="compression" class="mb-16 scroll-mt-20">
+                <div class="card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-6">3. 데이터 저장 및 압축 계층</h2>
+                    <p class="text-gray-600 mb-8">
+                        10초마다 생성되는 방대한 라이프로그는 비효율적입니다. '의미 기반 데이터 압축 모듈'은 연속된 로그들의 내용(의미)이 얼마나 유사한지를 계산하여, 비슷한 활동들을 하나의 '이벤트'로 자동 그룹화합니다. 아래 슬라이더를 조절하여 '유사도 임계값'을 변경하고, 로그들이 어떻게 이벤트로 묶이는지 확인해보세요.
+                    </p>
+                    <div class="module-box text-center">
+                        <div class="chart-container">
+                            <canvas id="similarityChart"></canvas>
+                        </div>
+                        <div class="mt-6">
+                            <label for="threshold" class="block font-medium mb-2">유사도 임계값: <span id="threshold-value" class="font-bold text-blue-600">0.85</span></label>
+                            <input type="range" id="threshold" min="0.5" max="0.98" step="0.01" value="0.85" class="w-full max-w-md mx-auto">
+                        </div>
+                         <p class="mt-4 text-sm text-gray-600">총 <span id="log-count">10</span>개의 로그가 <span id="event-count" class="font-bold text-lg">3</span>개의 이벤트로 그룹화되었습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-center items-center flow-arrow">↓</div>
+
+            <section id="search" class="scroll-mt-20">
+                 <div class="card p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-6">4. 검색 및 탐색 계층</h2>
+                     <p class="text-gray-600 mb-8">
+                        사용자는 WebXR 인터페이스를 통해 자연어 질문으로 자신의 라이프로그를 탐색할 수 있습니다. 시스템은 질문의 의도를 파악하여 압축된 이벤트 중에서 가장 관련성 높은 기록을 찾고, 원본 데이터를 기반으로 LLM이 답변을 생성합니다. 아래 검색창에 예시 질문을 입력하고 검색 과정을 시뮬레이션 해보세요.
+                    </p>
+                    <div class="module-box">
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <input type="text" id="search-query" class="flex-grow p-3 border rounded-md" value="어제 청소 언제 했지?">
+                            <button id="search-btn" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded transition-colors">검색</button>
+                        </div>
+                        <div id="search-process" class="mt-6 space-y-3 hidden">
+                            <div id="step1" class="p-3 border rounded-md bg-gray-50 opacity-0 transition-opacity duration-500"><strong>1. 질의 분석:</strong> '어제', '청소' 키워드 및 시간 정보 추출</div>
+                            <div id="step2" class="p-3 border rounded-md bg-gray-50 opacity-0 transition-opacity duration-500 delay-500"><strong>2. 의미 기반 검색:</strong> '청소'와 의미적으로 가장 유사한 이벤트를 압축 로그에서 검색</div>
+                            <div id="step3" class="p-3 border rounded-md bg-gray-50 opacity-0 transition-opacity duration-500 delay-1000"><strong>3. 원본 로그 추출:</strong> 검색된 이벤트에 해당하는 원본 통합 라이프로그 다수 추출</div>
+                            <div id="step4" class="p-3 border rounded-md bg-gray-50 opacity-0 transition-opacity duration-500 delay-1500"><strong>4. LLM 답변 생성:</strong> 추출된 로그들을 근거로 자연스러운 답변 생성</div>
+                        </div>
+                         <div id="search-result" class="mt-6 p-4 border-2 border-indigo-200 rounded-md bg-indigo-50 hidden">
+                             <h4 class="font-bold text-indigo-800">검색 결과 💬</h4>
+                            <p class="text-indigo-900 mt-2">어제 오후 3시 15분부터 약 10분간 거실에서 진공청소기를 사용하여 청소한 기록이 있습니다. 관련 시점의 3D 환경을 재현할까요?</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const logSamples = [
+                { log: '거실에서 커피를 마심', sim: null },
+                { log: '계속해서 커피를 마시며 창밖을 봄', sim: 0.95 },
+                { log: '주방으로 이동하여 컵을 씻음', sim: 0.52 },
+                { log: '설거지를 하고 주방을 정리함', sim: 0.91 },
+                { log: '주방 정리를 계속함', sim: 0.96 },
+                { log: '방으로 들어와 컴퓨터를 켬', sim: 0.45 },
+                { log: '컴퓨터 앞에 앉아 이메일을 확인', sim: 0.88 },
+                { log: '업무 관련 이메일을 작성하기 시작', sim: 0.94 },
+                { log: '계속해서 키보드를 치며 작업함', sim: 0.97 },
+                { log: '전화를 받기 위해 잠시 일어남', sim: 0.61 },
+            ];
+
+            const thresholdSlider = document.getElementById('threshold');
+            const thresholdValueSpan = document.getElementById('threshold-value');
+            const eventCountSpan = document.getElementById('event-count');
+            const logCountSpan = document.getElementById('log-count');
+            logCountSpan.textContent = logSamples.length;
+            
+            let chart;
+
+            function getEventGroups(threshold) {
+                const groups = [];
+                if (logSamples.length === 0) return { groups, eventCount: 0 };
+
+                let currentGroup = {
+                    backgroundColor: getRandomColor(),
+                    logs: [0]
+                };
+                groups.push(currentGroup);
+
+                for (let i = 1; i < logSamples.length; i++) {
+                    if (logSamples[i].sim > threshold) {
+                        currentGroup.logs.push(i);
+                    } else {
+                        currentGroup = {
+                            backgroundColor: getRandomColor(),
+                            logs: [i]
+                        };
+                        groups.push(currentGroup);
+                    }
+                }
+                return { groups, eventCount: groups.length };
+            }
+
+            function updateChart() {
+                const threshold = parseFloat(thresholdSlider.value);
+                thresholdValueSpan.textContent = threshold.toFixed(2);
+                
+                const { groups, eventCount } = getEventGroups(threshold);
+                eventCountSpan.textContent = eventCount;
+
+                const backgroundColors = new Array(logSamples.length);
+                groups.forEach(group => {
+                    group.logs.forEach(logIndex => {
+                        backgroundColors[logIndex] = group.backgroundColor;
+                    });
+                });
+                
+                chart.data.datasets[0].backgroundColor = backgroundColors;
+                chart.update();
+            }
+
+            function createChart() {
+                const ctx = document.getElementById('similarityChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: logSamples.map((_, i) => `로그 ${i+1}`),
+                        datasets: [{
+                            label: '이전 로그와의 유사도',
+                            data: logSamples.map(s => s.sim === null ? 1 : s.sim),
+                            borderWidth: 1,
+                            borderColor: '#9ca3af'
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 1,
+                                title: { display: true, text: '코사인 유사도' }
+                            },
+                            x: {
+                                ticks: {
+                                    autoSkip: false,
+                                    maxRotation: 45,
+                                    minRotation: 45,
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const index = context.dataIndex;
+                                        const sample = logSamples[index];
+                                        let label = `"${sample.log}"`;
+                                        if (sample.sim !== null) {
+                                            label += ` (유사도: ${sample.sim})`;
+                                        } else {
+                                            label += ` (첫 로그)`;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                updateChart();
+            }
+
+            function getRandomColor() {
+                const letters = '89ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 8)];
+                }
+                return color;
+            }
+            
+            thresholdSlider.addEventListener('input', updateChart);
+            createChart();
+
+            const generateLogBtn = document.getElementById('generate-log-btn');
+            const integratedLog = document.getElementById('integrated-log');
+            const logSimulationData = [
+                {
+                    video: "서재 책상과 의자가 보임",
+                    imu: "의자에 앉는 움직임 감지",
+                    audio: "사용자 발화: '오늘 할 일 확인하자'",
+                    log: "[2025-10-15 02:21:20] 서재 책상 의자에 앉으며 '오늘 할 일 확인하자'라고 말함."
+                },
+                {
+                    video: "스마트폰 화면이 보임",
+                    imu: "큰 움직임 없음",
+                    audio: "주변 소리: 알림음",
+                    log: "[2025-10-15 02:21:30] 자리에 앉아 스마트폰을 확인하는 중이며, 알림음이 들림."
+                }
+            ];
+            let currentLogIndex = 0;
+            generateLogBtn.addEventListener('click', () => {
+                const data = logSimulationData[currentLogIndex];
+                document.getElementById('context-video').textContent = data.video;
+                document.getElementById('context-imu').textContent = data.imu;
+                document.getElementById('context-audio').textContent = data.audio;
+                integratedLog.textContent = data.log;
+                integratedLog.classList.remove('fade-in');
+                void integratedLog.offsetWidth;
+                integratedLog.classList.add('fade-in');
+                currentLogIndex = (currentLogIndex + 1) % logSimulationData.length;
+            });
+            
+            const searchBtn = document.getElementById('search-btn');
+            const searchProcess = document.getElementById('search-process');
+            const searchResult = document.getElementById('search-result');
+
+            searchBtn.addEventListener('click', () => {
+                searchProcess.classList.remove('hidden');
+                searchResult.classList.add('hidden');
+                const steps = searchProcess.querySelectorAll('div');
+                steps.forEach(step => step.classList.remove('opacity-100'));
+                
+                setTimeout(() => steps[0].classList.add('opacity-100'), 100);
+                setTimeout(() => steps[1].classList.add('opacity-100'), 600);
+                setTimeout(() => steps[2].classList.add('opacity-100'), 1100);
+                setTimeout(() => steps[3].classList.add('opacity-100'), 1600);
+                setTimeout(() => {
+                    searchResult.classList.remove('hidden');
+                    searchResult.classList.add('fade-in');
+                }, 2200);
+            });
+        });
+    </script>
+</body>
 </html>
